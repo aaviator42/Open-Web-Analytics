@@ -1,3 +1,22 @@
+> [!NOTE]
+> ### About this repo
+> [Latest code](https://github.com/Open-Web-Analytics/Open-Web-Analytics/commit/efb54c4e1ba57fd7d9917be5ecb19c01915ca652) (as of 2024-10-18) from the [official OWA repo](https://github.com/Open-Web-Analytics/Open-Web-Analytics) merged with [modifications](https://github.com/Open-Web-Analytics/Open-Web-Analytics/commit/cdd54ec68805eec5018099dbdc3d0743b84dea37) from [ralfulrich's fork](https://github.com/ralfulrich/Open-Web-Analytics) ([see](https://stackoverflow.com/a/77315015/)) to allow installation on PHP 8.1+.
+> ### Installation
+> 1. Follow the instructions found [here](https://github.com/Open-Web-Analytics/Open-Web-Analytics/wiki/Installation) but download the latest OWA release from [this fork's releases](https://github.com/aaviator42/Open-Web-Analytics/releases) instead. Simply upload `owa.zip` to your server, extract the files, and go to `owa/install.php` in your browser.  
+> [OR]
+> 2. Manual install:
+>     ```
+>     git clone https://github.com/aaviator42/Open-Web-Analytics.git
+>     composer install
+>     npm install
+>     npm run build
+>     ```
+>     Then upload the files to your server and open `install.php` in your browser.
+>    
+> The original project README follows this notice.
+------------
+
+
 # Open Web Analytics Server
 
 Open Web Analytics is an open source alternative to commercial web analytics tools such as Google Analytics. This software allows you to stay in control of the data you collect about the user of your websites or applications.
