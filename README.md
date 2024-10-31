@@ -12,8 +12,10 @@
 >     npm run build
 >     ```
 >     Then upload the files to your server and open `install.php` in your browser.
->    
-> The original project README follows this notice.
+>
+> The [mods](https://github.com/aaviator42/Open-Web-Analytics/tree/mods) branch of this repo additionally contains experiements with non-upstream OWA functionality.
+> 
+> The original OWA project README follows this notice.
 ------------
 
 
