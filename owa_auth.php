@@ -1,5 +1,15 @@
 <?php
 
+// MODIFICATIONS TO ALLOW LOG IN VIA SESSION VARIABLES
+// set these sesion variables in your PHP script:
+//   $_SESSION['owa_user_id'] = 'admin'; //username
+//   $_SESSION['owa_user_password'] = 'owa-test-000#'; //password
+// then redirect to owa dashboard url
+// 
+// replace owa_auth.php with this script
+// 2024-10-18, aaviator42, GPLv2
+
+
 //
 // Open Web Analytics - An Open Source Web Analytics Framework
 //
@@ -115,7 +125,7 @@ class owa_auth extends owa_base {
      * @param string $necessary_role
      */
     function authenticateUser() {
-		
+		session_start();
 		$apiKey = owa_coreAPI::getRequestParam('apiKey') ?: owa_coreAPI::getServerParam( 'HTTP_X_API_KEY' );
 	
         // check existing auth status first in case someone else took care of this already.
@@ -147,6 +157,13 @@ class owa_auth extends owa_base {
             $ret = $this->authByCookies(owa_coreAPI::getStateParam('u'), owa_coreAPI::getStateParam('p'));
              owa_coreAPI::debug('User authenticated via cookies.');
             
+        } elseif (isset($_SESSION['owa_user_id']) && isset($_SESSION['owa_user_password'])) {
+            // auth user by session variables
+			error_log("SESSSION");
+            $this->setAuthMethod('session');
+            $ret = $this->authByInput($_SESSION['owa_user_id'], $_SESSION['owa_user_password']);
+            owa_coreAPI::debug('User authenticated via session variables.');
+            error_log($ret);
         } else {
             $ret = false;
             owa_coreAPI::debug("Could not find any credentials to authenticate with.");
@@ -382,6 +399,10 @@ class owa_auth extends owa_base {
         
         owa_coreAPI::createCookie( 'u', $this->u->get('user_id'), time()+3600*24*365*10 );
         owa_coreAPI::createCookie( 'p', $this->generateAuthCredential( $this->credentials['user_id'], $this->u->get('password') ), time()+3600*24*2 );
+        
+        // Save credentials to session
+        $_SESSION['owa_user_id'] = $this->u->get('user_id');
+        $_SESSION['owa_user_password'] = $this->generateAuthCredential( $this->credentials['user_id'], $this->u->get('password') );
     }
 
     /**
@@ -390,7 +411,10 @@ class owa_auth extends owa_base {
      */
     function deleteCredentials() {
 
-        return owa_coreAPI::clearState('p');
+        owa_coreAPI::clearState('p');
+        unset($_SESSION['owa_user_id']);
+        unset($_SESSION['owa_user_password']);
+        return true;
     }
 
     /**
