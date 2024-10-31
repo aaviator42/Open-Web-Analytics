@@ -1,19 +1,18 @@
 > [!NOTE]
-> ### About this repo
-> [Latest code](https://github.com/Open-Web-Analytics/Open-Web-Analytics/commit/efb54c4e1ba57fd7d9917be5ecb19c01915ca652) (as of 2024-10-18) from the [official OWA repo](https://github.com/Open-Web-Analytics/Open-Web-Analytics) merged with [modifications](https://github.com/Open-Web-Analytics/Open-Web-Analytics/commit/cdd54ec68805eec5018099dbdc3d0743b84dea37) from [ralfulrich's fork](https://github.com/ralfulrich/Open-Web-Analytics) ([see](https://stackoverflow.com/a/77315015/)) to allow installation on PHP 8.1+.
-> ### Installation
-> 1. Follow the instructions found [here](https://github.com/Open-Web-Analytics/Open-Web-Analytics/wiki/Installation) but download the latest OWA release from [this fork's releases](https://github.com/aaviator42/Open-Web-Analytics/releases) instead. Simply upload `owa.zip` to your server, extract the files, and go to `owa/install.php` in your browser.  
-> [OR]
-> 2. Manual install:
+>  **You are currently on the *`mods`* branch of `aaviator42/open-web-analytics`.**  
+> This branch is used to experiment with non-standard open-web-analytics functionality.  
+> Public releases correspond to the [master](https://github.com/aaviator42/Open-Web-Analytics/tree/master) branch, which aims to remain as close to upstream as possible while patching in PHP 8 support.
+>  
+> __Current mods:__
+> 1. `owa-auth.php`: allow log in from non-owa scripts or dashboards via session variables.  
+>     To use this, set these sesion variables in your PHP script:
 >     ```
->     git clone https://github.com/aaviator42/Open-Web-Analytics.git
->     composer install
->     npm install
->     npm run build
+>     $_SESSION['owa_user_id'] = 'admin'; //username
+>     $_SESSION['owa_user_password'] = 'owa-test-666#'; //password
 >     ```
->     Then upload the files to your server and open `install.php` in your browser.
->    
-> The original project README follows this notice.
+>     Then redirect to any owa dashboard url. The user should be logged in seamlessly.  
+>
+>  The original project README follows this notice.
 ------------
 
 
